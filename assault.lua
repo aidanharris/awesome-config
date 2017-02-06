@@ -8,11 +8,11 @@ local lgi = require("lgi")
 local cairo = lgi.cairo
 local Pango = lgi.Pango
 
-local assault = { mt = {***REMOVED******REMOVED***
+local assault = { mt = {} }
 
-local data = setmetatable({***REMOVED***, { __mode = "k"***REMOVED***)
+local data = setmetatable({}, { __mode = "k" })
 
-local properties = { "width", "height"***REMOVED***
+local properties = { "width", "height" }
 
 function assault.fit (assault, width, height)
 	local width = 2 + data[assault].width + (data[assault].stroke_width * 2) + data[assault].peg_width
@@ -81,7 +81,7 @@ local battery_bolt_generate = function (width, height)
 end
 
 local battery_border_generate = function (args)
-	local args = args or {***REMOVED***
+	local args = args or {}
 	local surface = cairo.ImageSurface(cairo.Format.A8, args.width, args.height)
 	local cr = cairo.Context(surface)
 
@@ -155,7 +155,7 @@ local properties = {
 	"peg_height", "peg_width", "stroke_width",
 	"font", "critical_level",
 	"normal_color", "charging_color", "critical_color"
-***REMOVED***
+}
 
 function assault.draw (assault, wibox, cr, width, height)
 	local center_x = (width / 2.0) - ((data[assault].width + (data[assault].stroke_width * 2)) / 2.0)
@@ -168,7 +168,7 @@ function assault.draw (assault, wibox, cr, width, height)
 		peg_top = data[assault].peg_top,
 		peg_height = data[assault].peg_height,
 		peg_width = data[assault].peg_width
-	***REMOVED***))
+	}))
 
 	cr.fill_rule = "EVEN_ODD"
 	local percent = acpi_battery_percent(data[assault].battery)
@@ -213,7 +213,7 @@ end
 
 --- Create an assault widget
 function assault.new (args)
-	local args = args or {***REMOVED***
+	local args = args or {}
 	local battery = args.battery or 'BAT0'
 	local adapter = args.adapter or 'AC'
 	local stroke_width = args.stroke_width or 2
@@ -250,7 +250,7 @@ function assault.new (args)
 		normal_color = normal_color,
 		critical_color = critical_color,
 		charging_color = charging_color
-	***REMOVED***
+	}
 
 	-- Set methods
 	for _, prop in ipairs(properties) do

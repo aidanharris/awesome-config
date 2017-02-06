@@ -2,7 +2,7 @@
 -- Default awesome theme --
 ---------------------------
 
-local theme = {***REMOVED***
+local theme = {}
 
 theme.font          = "Hack 11"
 
