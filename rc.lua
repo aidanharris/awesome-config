@@ -59,17 +59,34 @@ beautiful.init("/home/aidan/.config/awesome/themes/default/theme.lua")
 --     peg_top = (calculated),
 --     peg_height = (15 / 3),
 --     peg_width = 2,
---     font = beautiful.font,
+--     font = io.popen("echo '" .. beautiful.font .. "' | rev | sed 's/[^ ]* //' | rev"):read('*all') .. " 20",
 --     critical_level = 0.10,
 --     normal_color = beautiful.fg_normal
 -- })
 
 -- This is used later as the default terminal and editor to run.
 -- terminal = "xterm -fa 'Hack' -fs 12"
-terminal = "run-in-terminator"
+
+terminals = {
+  terminator = 'run-in-terminator';
+  gnome = 'run-in-gnome-terminal';
+  guake = 'run-in-guake';
+  konsole = 'run-in-konsole';
+  xterm = 'xterm -fa \'Hack\' -fs 12';
+}
+terminal = terminals["konsole"]
+
 -- editor = os.getenv("EDITOR") or "vi"
-editor = "vim"
+shell = io.popen('cat /etc/passwd | grep ' .. os.getenv('USER') .. ' | rev | sed \'s/:.*//g\' | rev | xargs printf'):read('*all')
+shell_basename = io.popen('printf "$(basename ' .. shell .. ')"'):read('*all')
+-- An ugly hack to read the EDITOR variable exported in my shells (in my case zsh) rc file. Still better than grep and sed...
+-- editor = io.popen(shell_basename .. " -c 'source " .. os.getenv("HOME") .. "/." .. shell_basename .. "rc; echo \"$EDITOR\"'"):read('*all')
+editor = io.popen(shell .. ' -c \'source ' .. os.getenv("HOME") .. '/.' .. shell_basename .. 'rc;echo "$EDITOR"\''):read('*all')
 editor_cmd = terminal .. " -e " .. editor
+
+-- Default Screen Locker
+screenlocker = "gnome-screensaver-command"
+screenlocker_lock = screenlocker .. " -l"
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -338,6 +355,10 @@ globalkeys = awful.util.table.join(
 
   awful.key({}, "XF86AudioPrev", function()
     awful.util.spawn("playerctl previous")
+  end),
+
+  awful.key({ modkey }, "l", function ()
+    awful.util.spawn( screenlocker_lock )
   end),
 
   awful.key({ }, "XF86MonBrightnessDown", function ()
