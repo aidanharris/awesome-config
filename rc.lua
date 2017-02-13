@@ -46,23 +46,28 @@ end
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init("/home/aidan/.config/awesome/themes/default/theme.lua")
 
--- myassault = assault({
---     battery = "BAT0", -- battery ID to get data from
---     adapter = "AC", -- ID of the AC adapter to get data from
---     critical_color = "#dc322f",
---     charging_color = "#859900",
---     width = 50,
---     height = 30,
---     bolt_width = 19,
---     bolt_height = 11,
---     stroke_width = 2,
---     peg_top = (calculated),
---     peg_height = (15 / 3),
---     peg_width = 2,
---     font = io.popen("echo '" .. beautiful.font .. "' | rev | sed 's/[^ ]* //' | rev"):read('*all') .. " 20",
---     critical_level = 0.10,
---     normal_color = beautiful.fg_normal
--- })
+HAS_BATTERY = io.popen("sh -c \"if [[ \\$((acpi --verbose | grep Battery) &> /dev/null && echo 'yes' || echo 'no') = 'yes' ]]; then echo 'yes'; else echo 'no'; fi\""):read('*all')
+
+if HAS_BATTERY == 'yes'
+then
+myassault = assault({
+    battery = "BAT0", -- battery ID to get data from
+    adapter = "AC", -- ID of the AC adapter to get data from
+    critical_color = "#dc322f",
+    charging_color = "#859900",
+    width = 50,
+    height = 30,
+    bolt_width = 19,
+    bolt_height = 11,
+    stroke_width = 2,
+    peg_top = (calculated),
+    peg_height = (15 / 3),
+    peg_width = 2,
+    font = io.popen("echo '" .. beautiful.font .. "' | rev | sed 's/[^ ]* //' | rev"):read('*all') .. " 20",
+    critical_level = 0.10,
+    normal_color = beautiful.fg_normal
+})
+end
 
 -- This is used later as the default terminal and editor to run.
 -- terminal = "xterm -fa 'Hack' -fs 12"
@@ -245,7 +250,7 @@ for s = 1, screen.count() do
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
     if s == 1 then right_layout:add(wibox.widget.systray()) end
-    -- right_layout:add(myassault)
+    if HAS_BATTERY == 'yes' then right_layout:add(myassault) end
     right_layout:add(mytextclock)
     right_layout:add(mylayoutbox[s])
 
