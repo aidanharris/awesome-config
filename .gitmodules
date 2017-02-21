@@ -1,3 +1,6 @@
 [submodule "awesome-switcher-preview"]
 	path = awesome-switcher-preview
 	url = https://github.com/berlam/awesome-switcher-preview.git
+[submodule "assault"]
+	path = assault
+	url = https://github.com/NuckChorris/assault
