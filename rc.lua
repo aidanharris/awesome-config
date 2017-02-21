@@ -52,7 +52,7 @@ HAS_BATTERY = io.popen("sh -c \"if [[ \\$((acpi --verbose | grep Battery) &> /de
 
 if HAS_BATTERY == 'yes'
 then
-myassault = assault({
+  myassault = assault({
     battery = "BAT0", -- battery ID to get data from
     adapter = "AC", -- ID of the AC adapter to get data from
     critical_color = "#dc322f",
@@ -68,7 +68,9 @@ myassault = assault({
     font = io.popen("echo '" .. beautiful.font .. "' | rev | sed 's/[^ ]* //' | rev"):read('*all') .. " 20",
     critical_level = 0.10,
     normal_color = beautiful.fg_normal
-})
+  })
+else
+  myassault = {}
 end
 
 -- This is used later as the default terminal and editor to run.
@@ -305,6 +307,7 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.fixed.horizontal,
             mykeyboardlayout,
             wibox.widget.systray(),
+            myassault,
             mytextclock,
             s.mylayoutbox,
         },
