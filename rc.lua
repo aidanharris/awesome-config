@@ -46,7 +46,7 @@ end
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init("/home/aidan/.config/awesome/themes/default/theme.lua")
 
-HAS_BATTERY = io.popen("sh -c \"if [[ \\$((acpi --verbose | grep Battery) &> /dev/null && echo 'yes' || echo 'no') = 'yes' ]]; then echo 'yes'; else echo 'no'; fi\""):read('*all')
+HAS_BATTERY = io.popen("sh -c \"if [[ \\$((acpi --verbose | grep Battery) &> /dev/null && echo 'yes' || echo 'no') = 'yes' ]]; then printf 'yes'; else printf 'no'; fi\""):read('*all')
 
 if HAS_BATTERY == 'yes'
 then
