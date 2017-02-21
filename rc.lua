@@ -81,6 +81,25 @@ terminals = {
 }
 terminal = terminals["konsole"]
 
+filemanagers = {
+  nautilus = 'nautilus'; -- GNOME Files
+  thunar = 'thunar'; -- XFCE File Manager
+  nemo = 'nemo'; -- Cinnamon File Manager
+  dolphin = 'dolphin'; -- KDE File Manager
+  pantheon = 'pantheon-files'; -- Elementary OS File Manager
+  caja = 'caja'; -- MATE File Manager
+  -- Hardcore CLI File Managers :P
+  ranger = 'ranger';
+  midnightCommander = 'mc';
+  pcmanfm = 'pcmanfm';
+  pcmanfmQt = 'pcmanfm-qt';
+  spacefm = 'spacefm';
+  vifm = 'vifm';
+}
+
+filemanager = filemanagers['ranger']
+filemanager_cmd = terminal .. " " .. filemanager
+
 -- editor = os.getenv("EDITOR") or "vi"
 shell = io.popen('cat /etc/passwd | grep ' .. os.getenv('USER') .. ' | rev | sed \'s/:.*//g\' | rev | xargs printf'):read('*all')
 shell_basename = io.popen('printf "$(basename ' .. shell .. ')"'):read('*all')
@@ -156,7 +175,8 @@ varietymenu = {
 mymainmenu = awful.menu({ items = { { "Awesome", myawesomemenu, beautiful.awesome_icon },
                                     { "Apps", xdgmenu },
                                     { "Variety", varietymenu },
-                                    { "Terminal", terminal }
+                                    { "Terminal", terminal },
+                                    { "File Manager", filemanager_cmd }
                                   }
                         })
 
@@ -507,7 +527,9 @@ awful.rules.rules = {
                      focus = awful.client.focus.filter,
                      raise = true,
                      keys = clientkeys,
-                     buttons = clientbuttons } },
+                     buttons = clientbuttons,
+                     screen = awful.screen.preferred,
+                   } },
     { rule = { class = "MPlayer" },
       properties = { floating = true } },
     { rule = { class = "pinentry" },
