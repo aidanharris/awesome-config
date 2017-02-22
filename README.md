@@ -1,6 +1,8 @@
 # awesome-config
 My config files for the Awesome window manager
 
+![Awesome Config Screenshot](https://github.com/aidanharris/awesome-config/raw/master/screenshots/Screenshot1.png)
+
 ## Usage
 
 ```bash
