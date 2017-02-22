@@ -555,7 +555,14 @@ clientkeys = awful.util.table.join(
           c.maximized = not c.maximized
           c:raise()
         end,
-        {description = "maximize", group = "client"})
+        {description = "maximize", group = "client"}),
+    awful.key({ modkey, "Control" }, "t",
+        function (c)
+          -- toggle titlebar
+          awful.titlebar.toggle(c)
+        end,
+        {description = "toggle titlebars", group = "client"}
+    )
 )
 
 
@@ -731,6 +738,7 @@ client.connect_signal("request::titlebars", function(c)
         },
         layout = wibox.layout.align.horizontal
     }
+    awful.titlebar.toggle(c)
 end)
 
 -- Enable sloppy focus, so that focus follows mouse.
