@@ -67,7 +67,8 @@ then
     peg_width = 2,
     font = io.popen("echo '" .. beautiful.font .. "' | rev | sed 's/[^ ]* //' | rev"):read('*all') .. " 20",
     critical_level = 0.10,
-    normal_color = beautiful.fg_normal
+    normal_color = beautiful.fg_normal,
+    timeout = 1,
   })
 else
   myassault = nil
