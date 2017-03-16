@@ -183,7 +183,7 @@ mymainmenu = awful.menu({ items = { { "Awesome", myawesomemenu, beautiful.awesom
                                     { "Apps", xdgmenu },
                                     { "Variety", varietymenu },
                                     { "Terminal", terminal },
-                                    { "File Manager", filemanager_cmd }
+                                    { "Files", filemanager_cmd }
                                   }
                         })
 
