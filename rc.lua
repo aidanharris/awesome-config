@@ -491,18 +491,21 @@ globalkeys = awful.util.table.join(
   -- Media Keys
   awful.key({}, "XF86AudioPlay", function()
     awful.util.spawn("playerctl play-pause")
+    awful.util.spawn("bash -c 'cmus-remote -Q | head -n1 | grep -qE \"^status p(laying)?(aused)?$\" && cmus-remote -u'")
     end,
     {description = "play / pause system audio", group = "media controls"}
   ),
 
   awful.key({}, "XF86AudioNext", function()
     awful.util.spawn("playerctl next")
+    awful.util.spawn("bash -c 'cmus-remote -Q | head -n1 | grep -qE \"^status p(laying)$\" && cmus-remote --next'")
     end,
     {description = "next track", group = "media controls"}
   ),
 
   awful.key({}, "XF86AudioPrev", function()
     awful.util.spawn("playerctl previous")
+    awful.util.spawn("bash -c 'cmus-remote -Q | head -n1 | grep -qE \"^status p(laying)$\" && cmus-remote --prev'")
     end,
     {description = "previous track", group = "media controls"}
   ),
