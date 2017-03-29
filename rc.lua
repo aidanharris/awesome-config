@@ -665,12 +665,14 @@ awful.rules.rules = {
 
         name = {
           "Event Tester",  -- xev.
+          "Authy",
         },
         role = {
           "AlarmWindow",  -- Thunderbird's calendar.
           "pop-up",       -- e.g. Google Chrome's (detached) Developer Tools.
         }
-      }, properties = { floating = true }},
+      }, properties = { floating = true },
+    },
 
     -- @DOC_DIALOG_RULE@
     -- Add titlebars to normal clients and dialogs
