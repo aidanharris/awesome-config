@@ -510,7 +510,12 @@ globalkeys = awful.util.table.join(
     {description = "previous track", group = "media controls"}
   ),
 
-  awful.key({ modkey }, "l", function ()
+  awful.key({ "Control", "Mod1" }, "Delete", function ()
+    awful.util.spawn( screenlocker_lock )
+    end,
+    {description = "lock computer", group = "screenlocker"}
+  ),
+  awful.key({ "Control", "Mod1" }, "l", function () -- For my Macbook which doesn't have a delete key...
     awful.util.spawn( screenlocker_lock )
     end,
     {description = "lock computer", group = "screenlocker"}
