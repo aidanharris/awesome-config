@@ -330,13 +330,13 @@ then
   brightness_bindings = awful.util.table.join(
     awful.key({ }, "XF86MonBrightnessDown",
       function ()
-        awful.util.spawn_with_shell("curl -q -s http://localhost:5600/decrease | xargs -I '{}' python -c \"print(int({} / $(cat /sys/class/backlight/gmux_backlight/max_brightness) * 100))\" | xargs -I '{}' flock -n /tmp/brightnessNotify.lock notify-send -u low -t 700 'Brightness' '{}%' && rm -f /tmp/brightnessNotify.lock")
+        awful.spawn("curl -q -s http://localhost:5600/decrease | xargs -I '{}' python -c \"print(int({} / $(cat /sys/class/backlight/gmux_backlight/max_brightness) * 100))\" | xargs -I '{}' flock -n /tmp/brightnessNotify.lock notify-send -u low -t 700 'Brightness' '{}%' && rm -f /tmp/brightnessNotify.lock")
       end,
       {description = "decrease screen brightness", group = "brightness"}
     ),
     awful.key({ }, "XF86MonBrightnessUp",
       function ()
-        awful.util.spawn_with_shell("curl -q -s http://localhost:5600/increase | xargs -I '{}' python -c \"print(int({} / $(cat /sys/class/backlight/gmux_backlight/max_brightness) * 100))\" | xargs -I '{}' flock -n /tmp/brightnessNotify.lock notify-send -u low -t 700 'Brightness' '{}%' && rm -f /tmp/brightnessNotify.lock")
+        awful.spawn("curl -q -s http://localhost:5600/increase | xargs -I '{}' python -c \"print(int({} / $(cat /sys/class/backlight/gmux_backlight/max_brightness) * 100))\" | xargs -I '{}' flock -n /tmp/brightnessNotify.lock notify-send -u low -t 700 'Brightness' '{}%' && rm -f /tmp/brightnessNotify.lock")
       end,
       {description = "increase screen brightness", group = "brightness"}
     )
@@ -350,13 +350,13 @@ then
   keyboard_backlight_bindings = awful.util.table.join(
     awful.key({ }, "XF86KbdBrightnessDown",
       function ()
-        awful.util.spawn("curl -q -s http://localhost:5600/decreasekbd &> /dev/null 2>&1")
+        awful.spawn("curl -q -s http://localhost:5600/decreasekbd &> /dev/null 2>&1")
       end,
       {description = "decrease keyboard backlight", group = "brightness"}
     ),
     awful.key({ }, "XF86KbdBrightnessUp",
       function ()
-        awful.util.spawn("curl -q -s http://localhost:5600/increasekbd &> /dev/null 2>&1")
+        awful.spawn("curl -q -s http://localhost:5600/increasekbd &> /dev/null 2>&1")
       end,
       {description = "increase keyboard backlight", group = "brightness"}
     )
@@ -468,55 +468,55 @@ globalkeys = awful.util.table.join(
     -- Volume Keys
     awful.key({}, "#122",
       function ()
-        awful.util.spawn("amixer -q -D pulse sset Master 5%-")
-        awful.util.spawn("/usr/local/bin/volume_percentage_notification.sh")
+        awful.spawn("amixer -q -D pulse sset Master 5%-")
+        awful.spawn("/usr/local/bin/volume_percentage_notification.sh")
         end,
       {description = "decrease volume by 5%", group = "media controls"}
     ),
 
   awful.key({}, "#123",
     function ()
-      awful.util.spawn("amixer -q -D pulse sset Master 5%+")
-      awful.util.spawn("/usr/local/bin/volume_percentage_notification.sh")
+      awful.spawn("amixer -q -D pulse sset Master 5%+")
+      awful.spawn("/usr/local/bin/volume_percentage_notification.sh")
     end,
     {description = "increase volume by 5%", group = "media controls"}
   ),
 
   awful.key({}, "XF86AudioMute", function ()
-    awful.util.spawn("amixer -D pulse set Master 1+ toggle")
+    awful.spawn("amixer -D pulse set Master 1+ toggle")
     end,
     {description = "mute / unmute system audio", group = "media controls"}
   ),
 
   -- Media Keys
   awful.key({}, "XF86AudioPlay", function()
-    awful.util.spawn("playerctl play-pause")
-    awful.util.spawn("bash -c 'cmus-remote -Q | head -n1 | grep -qE \"^status p(laying)?(aused)?$\" && cmus-remote -u'")
+    awful.spawn("playerctl play-pause")
+    awful.spawn("bash -c 'cmus-remote -Q | head -n1 | grep -qE \"^status p(laying)?(aused)?$\" && cmus-remote -u'")
     end,
     {description = "play / pause system audio", group = "media controls"}
   ),
 
   awful.key({}, "XF86AudioNext", function()
-    awful.util.spawn("playerctl next")
-    awful.util.spawn("bash -c 'cmus-remote -Q | head -n1 | grep -qE \"^status p(laying)$\" && cmus-remote --next'")
+    awful.spawn("playerctl next")
+    awful.spawn("bash -c 'cmus-remote -Q | head -n1 | grep -qE \"^status p(laying)$\" && cmus-remote --next'")
     end,
     {description = "next track", group = "media controls"}
   ),
 
   awful.key({}, "XF86AudioPrev", function()
-    awful.util.spawn("playerctl previous")
-    awful.util.spawn("bash -c 'cmus-remote -Q | head -n1 | grep -qE \"^status p(laying)$\" && cmus-remote --prev'")
+    awful.spawn("playerctl previous")
+    awful.spawn("bash -c 'cmus-remote -Q | head -n1 | grep -qE \"^status p(laying)$\" && cmus-remote --prev'")
     end,
     {description = "previous track", group = "media controls"}
   ),
 
   awful.key({ "Control", "Mod1" }, "Delete", function ()
-    awful.util.spawn( screenlocker_lock )
+    awful.spawn( screenlocker_lock )
     end,
     {description = "lock computer", group = "screenlocker"}
   ),
   awful.key({ "Control", "Mod1" }, "l", function () -- For my Macbook which doesn't have a delete key...
-    awful.util.spawn( screenlocker_lock )
+    awful.spawn( screenlocker_lock )
     end,
     {description = "lock computer", group = "screenlocker"}
   ),
