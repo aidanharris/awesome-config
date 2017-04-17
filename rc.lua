@@ -13,6 +13,8 @@ local hotkeys_popup = require("awful.hotkeys_popup").widget
 -- Enable VIM help for hotkeys widget when client with matching name is opened:
 require("awful.hotkeys_popup.keys.vim")
 
+require("cheatsheets.tmux")
+
 local assault = require('assault')
 
 local xdg_menu = require("archmenu")
@@ -647,6 +649,7 @@ awful.rules.rules = {
                      focus = awful.client.focus.filter,
                      raise = true,
                      keys = clientkeys,
+                     maximized = false,
                      buttons = clientbuttons,
                      screen = awful.screen.preferred,
                      placement = awful.placement.no_overlap+awful.placement.no_offscreen
@@ -669,17 +672,44 @@ awful.rules.rules = {
           "Wpa_gui",
           "pinentry",
           "veromix",
-          "xtightvncviewer"},
+          "xtightvncviewer",
+        },
 
         name = {
           "Event Tester",  -- xev.
-          "Authy",
         },
         role = {
           "AlarmWindow",  -- Thunderbird's calendar.
           "pop-up",       -- e.g. Google Chrome's (detached) Developer Tools.
         }
       }, properties = { floating = true },
+    },
+
+    { rule_any = {
+        class = {
+          "Polkit-gnome-authentication-agent-1",
+          "Polkit-mate-authentication-agent-1",
+          "Mate-control-center",
+          "Mate-notification-properties",
+          "Mate-appearance-properties",
+          "Mate-default-applications-properties",
+          "Mate-about-me",
+          "Tracker-preferences",
+          "Mate-volume-control",
+          "Gnome-control-center",
+          "Gnome-tweak-tool",
+          "Nm-connection-editor",
+          "Alacarte",
+          "MenuLibre",
+          "1Password.exe.Wine",
+          "Dialog",
+          "Dialog.Firefox",
+          "Syncthing GTK"
+        },
+        name = {
+          "Authy",
+        }
+      }, properties = { floating = true, placement = "center" }
     },
 
     -- @DOC_DIALOG_RULE@

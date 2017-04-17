@@ -6,16 +6,23 @@ local theme = {}
 
 theme.font          = "Hack 11"
 
-theme.bg_normal     = "#073642"
-theme.bg_focus      = "#002b36"
+-- theme.bg_normal     = "#073642"
+theme.bg_normal     = "#13191C"
+-- theme.bg_focus      = "#002b36"
+theme.bg_focus      = "#13191C"
 theme.bg_urgent     = "#dc322f"
-theme.bg_minimize   = "#444444"
+-- theme.bg_minimize   = "#444444"
 theme.bg_systray    = theme.bg_normal
 
 theme.fg_normal     = "#93a1a1"
 theme.fg_focus      = "#839496"
 theme.fg_urgent     = "#586e75"
-theme.fg_minimize   = "#b58900"
+-- theme.fg_minimize   = "#b58900"
+theme.fg_minimize   = "#93a1a1"
+
+theme.tasklist_fg_normal = "#93a1a1"
+theme.tasklist_fg_focus = "#b58900"
+theme.taglist_fg_focus = "#b58899"
 
 theme.useless_gap   = 0
 theme.border_width  = 1
